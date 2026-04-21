@@ -1,0 +1,162 @@
+{
+  "info": {
+    "_postman_id": "6d70c723-bcc4-4508-b79c-38a9e690ef4f",
+    "name": "Star Wars",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53794615",
+    "_collection_link": "https://go.postman.co/collection/53794615-6d70c723-bcc4-4508-b79c-38a9e690ef4f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Personaje 1",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code es 200\", () => {\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"La respuesta tiene contenido\", () => {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.be.an(\"object\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Existe algún nombre en la respuesta\", () => {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(JSON.stringify(jsonData)).to.include(\"name\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://swapi.tech/api/people/1",
+          "protocol": "https",
+          "host": [
+            "swapi",
+            "tech"
+          ],
+          "path": [
+            "api",
+            "people",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Planeta",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code es 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Existe el planeta Tatooine\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    const nombres = jsonData.results.map(p => p.name);\r",
+              "\r",
+              "    pm.expect(nombres).to.include(\"Tatooine\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://swapi.tech/api/planets",
+          "protocol": "https",
+          "host": [
+            "swapi",
+            "tech"
+          ],
+          "path": [
+            "api",
+            "planets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Nave",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code es 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"La nave tiene nombre\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.result.properties.name).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"La nave es Death Star\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.result.properties.name).to.eql(\"Death Star\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Tiene tripulación\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.result.properties.crew).to.exist;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://swapi.tech/api/starships/9",
+          "protocol": "https",
+          "host": [
+            "swapi",
+            "tech"
+          ],
+          "path": [
+            "api",
+            "starships",
+            "9"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
